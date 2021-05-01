@@ -1,0 +1,1 @@
+from .hifi_gan import Generator as HifiGenerator

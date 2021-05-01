@@ -1,0 +1,12 @@
+.cache/
+.pytest_cache/
+**/__pycache__/
+
+**/.DS_Store
+
+# deployment cache
+build/
+dist/
+hooks-files/
+warn_processing.py
+VCToolbox.spec

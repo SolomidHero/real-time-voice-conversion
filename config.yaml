@@ -1,0 +1,16 @@
+data: # shouldn't be changed
+  sample_rate: 16000
+  n_mels: 80
+  n_fft: 1280
+  win_length: 1280
+  hop_length: 320
+  f_min: 50.
+  f_max: null
+  preemph: 0.97
+
+ckpt_dict:
+  hifi_gan:
+    'generator': ['https://github.com/SolomidHero/FragmentVC-with-RAdam/releases/download/v3.0/generator_pt330', 'wget']
+    'config.yaml': ['https://github.com/SolomidHero/FragmentVC-with-RAdam/releases/download/v3.0/config_v1_4.json', 'wget']
+  fragmentvc:
+    'model.pt': ['https://github.com/SolomidHero/FragmentVC-with-RAdam/releases/download/v4.5/fragmentvc_v4_5_stage2.pt', 'wget']
