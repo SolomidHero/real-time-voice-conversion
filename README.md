@@ -28,7 +28,7 @@ pip install -r requirements.txt
 python3 app.py
 ```
 
-3^{*}. You may want to run tests for this repo. It can be done via:
+3*. You may want to run tests for this repo. It can be done via:
 
 ```
 pytest
