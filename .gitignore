@@ -5,8 +5,7 @@
 **/.DS_Store
 
 # deployment cache
-build/
-dist/
-hooks-files/
-warn_processing.py
-VCToolbox.spec
+dist/build/
+dist/dist/
+dist/hooks/
+dist/VCToolbox.spec

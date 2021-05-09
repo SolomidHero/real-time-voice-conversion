@@ -12,6 +12,8 @@ Available OS releases:
 
 - MacOS (For now (1.05) release isn't done)
 
+If you want to distribute for other platforms follow instructions in `dist/BUILD.md`.
+
 ## Installation (Development build)
 
 1. Install Requirements (Python 3.7+ were tested ok)
