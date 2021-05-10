@@ -56,4 +56,4 @@ pyinstaller --name="VCToolbox" --windowed --hidden-import=typing_extensions -y -
 If everything done right, there would be an executable file in dist/ folder.
 
 5.(optional) For distribution purposes move app binary into root folder, because it uses `config.yaml` and `datasets/` pathes. Then zip into archive, or use other utility for `.app` and `.dmg` creation.
-
+ vefkv efkvejkvnefjqlnveqlnvlq
