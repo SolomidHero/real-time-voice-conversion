@@ -2,9 +2,9 @@ from engine import Utterance
 from .widgets import get_figure_widget, FigureWidget
 
 import matplotlib.pyplot as plt
-from PySide6.QtCore import Qt, QStringListModel
-from PySide6.QtGui import QImage, QPixmap
-from PySide6.QtWidgets import *
+from PySide2.QtCore import Qt, QStringListModel
+from PySide2.QtGui import QImage, QPixmap
+from PySide2.QtWidgets import *
 
 from pathlib import Path
 from typing import List, Set

@@ -1,6 +1,6 @@
-from PySide6.QtGui import QPixmap
-from PySide6.QtWidgets import QLabel
-from PySide6.QtCore import Signal
+from PySide2.QtGui import QPixmap
+from PySide2.QtWidgets import QLabel
+from PySide2.QtCore import Signal
 
 import io
 
