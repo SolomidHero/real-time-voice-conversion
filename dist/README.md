@@ -17,9 +17,11 @@ The procedure of distribution of this repo toolbox consists of several steps (st
 
 ## MacOS
 
-1. Install all required packages from requirements.txt.
+1. Install all required packages from requirements.txt. Also install pyinstaller and uninstall some deprecated (but installed) packages:
 ```bash
 pip -r ../requirements.txt
+pip install pyinstaller
+pip uninstall typing dataclasses
 ```
 
 2. Trying first build which will definetely fail, but provide us with important warning log.
@@ -33,10 +35,12 @@ After command above, there would be two new directories ('build/' and 'dist/'). 
 
 3. Define installation hooks for not found modules. For this run `warn_processing.py` file:
 ```bash
-python3 warn_preprocessing.py
+python3 warn_processing.py
 ```
 
-This stage is cumbersome and depends on previous one. Some important modules that weren't found (such as librosa, etc) already added in script. After the command, there will be generated `hooks/` directory with files defining hooks for PyInstaller. Tree will look like:
+**Important:** If script fails on python package itself (there would be string consist in python path), you should add specified string into `remove_list` in `warn_processing.py` file and run script again.
+
+This stage is cumbersome and depends on previous one. Some important modules that weren't found (such as librosa, etc) already added in script. After the command, there will be generated `hooks/` directory with files (~60 files) defining hooks for PyInstaller. Tree will look like:
 
 ```
 .
@@ -46,6 +50,11 @@ This stage is cumbersome and depends on previous one. Some important modules tha
 ├── dist
 ├── hooks
 └── warn_processing.py
+```
+
+You can remove unnecessary 'dist/' and 'build/' folders for now:
+```
+rm -rf dist/ build/
 ```
 
 4. Build with hooks for not found packages:

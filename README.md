@@ -10,7 +10,8 @@ Application file of every release was created by [PyInstaller](https://pypi.org/
 
 Available OS releases:
 
-- MacOS (For now (1.05) release isn't done)
+- MacOS
+- Linux
 
 If you want to distribute for other platforms follow instructions in `dist/BUILD.md`.
 
