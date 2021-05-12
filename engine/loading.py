@@ -6,7 +6,7 @@ import os
 import torch
 import json
 
-ckpt_default_dir = '.cache/'
+ckpt_dir = os.path.join(cfg.root_dir, cfg.ckpt_default_path)
 ckpt_dict = cfg.ckpt_dict
 
 
@@ -14,12 +14,12 @@ def get_vocoder():
   group_name = 'hifi_gan'
   download_group(group_name)
 
-  config_path = os.path.join(ckpt_default_dir, group_name, "config.yaml")
+  config_path = os.path.join(ckpt_dir, group_name, "config.yaml")
   json_config = json.loads(open(config_path).read())
   with torch.no_grad():
     generator = HifiGenerator(DictConfig(json_config)).eval()
 
-  ckpt_path = os.path.join(ckpt_default_dir, group_name, "generator")
+  ckpt_path = os.path.join(ckpt_dir, group_name, "generator")
   state = torch.load(ckpt_path, map_location=torch.device('cpu'))
   generator.load_state_dict(state['generator'])
   generator.remove_weight_norm()
@@ -31,7 +31,7 @@ def get_vc_model():
   group_name = 'fragmentvc'
   download_group(group_name)
 
-  ckpt_path = os.path.join(ckpt_default_dir, group_name, "model.pt")
+  ckpt_path = os.path.join(ckpt_dir, group_name, "model.pt")
   model = torch.jit.load(ckpt_path).eval()
 
   return model
@@ -39,7 +39,7 @@ def get_vc_model():
 
 def download_group(group_name):
   for filename, (url, agent) in ckpt_dict[group_name].items():
-    filepath = os.path.join(ckpt_default_dir, group_name, filename)
+    filepath = os.path.join(ckpt_dir, group_name, filename)
     _download(filepath, url, agent=agent)
 
 

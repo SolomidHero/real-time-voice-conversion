@@ -8,6 +8,8 @@ data: # shouldn't be changed
   f_max: null
   preemph: 0.97
 
+root_dir: null # will be defined onstart
+ckpt_default_path: '.cache'
 ckpt_dict:
   hifi_gan:
     'generator': ['https://github.com/SolomidHero/FragmentVC-with-RAdam/releases/download/v3.0/generator_pt330', 'wget']
