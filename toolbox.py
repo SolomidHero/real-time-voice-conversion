@@ -14,10 +14,6 @@ import sys
 from pathlib import Path
 from collections import defaultdict
 
-# Use this directory structure for your datasets, or modify it to fit your needs
-recognized_datasets = [
-  'test'
-]
 
 # Maximum of generated wavs to keep on memory
 MAX_WAVS = 15
@@ -28,7 +24,9 @@ MAX_LOADED_SAMPLES = 100
 class Toolbox:
   def __init__(self, datasets_root, seed):
     sys.excepthook = self.excepthook
+    self.seed = seed
     self.datasets_root = datasets_root
+    self.recognized_datasets = []
     self.utterances = set()
     self.current_generated = (None, None, None, None) # speaker_name, mel, breaks, wav
     self.speaker_filepathes = defaultdict(set)
@@ -60,7 +58,7 @@ class Toolbox:
   def setup_events(self):
     # Dataset, speaker and utterance selection
     self.ui.browser_load_button.clicked.connect(lambda: self.load_from_browser())
-    random_func = lambda level: lambda: self.ui.populate_browser(self.datasets_root, recognized_datasets, level)
+    random_func = lambda level: lambda: self.ui.populate_browser(self.datasets_root, self.recognized_datasets, level)
     self.ui.random_dataset_button.clicked.connect(random_func(0))
     self.ui.random_speaker_button.clicked.connect(random_func(1))
     self.ui.random_utterance_button.clicked.connect(random_func(2))
@@ -108,7 +106,8 @@ class Toolbox:
     self.ui.play(self.current_src_utt, cfg.data.sample_rate)
 
   def reset_ui(self, seed):
-    self.ui.populate_browser(self.datasets_root, recognized_datasets, 0, True)
+    self.recognized_datasets = [p for p in self.datasets_root.iterdir() if p.is_dir()]
+    self.ui.populate_browser(self.datasets_root, self.recognized_datasets, 0, True)
     self.ui.populate_gen_options(seed, self.trim_silences)
 
   def load_from_browser(self, fpath=None):
@@ -171,6 +170,7 @@ class Toolbox:
     self.ui.draw_umap_projections(self.utterances)
 
   def clear_utterances(self):
+    self.reset_ui(self.seed)
     self.utterances.clear()
     self.ui.draw_umap_projections(self.utterances)
 

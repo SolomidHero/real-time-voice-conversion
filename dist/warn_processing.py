@@ -69,6 +69,7 @@ remove_list = [
 ]
 add_list = [
     'sacremoses',
+    'resemblyzer',
     'librosa',
 ]
 for pkg in remove_list:
