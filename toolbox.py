@@ -301,6 +301,8 @@ class Toolbox:
     self.ui.set_loading(1)
     start = timer()
     self.engine = VC()
+    for stage in self.engine.logged_init():
+      self.ui.set_loading(stage)
     self.ui.log("Done (%dms)." % int(1000 * (timer() - start)), "append")
     self.ui.set_loading(0)
 

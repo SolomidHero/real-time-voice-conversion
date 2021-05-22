@@ -43,12 +43,33 @@ class Utterance:
 class VC:
   def __init__(self):
     self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    self.feature_extractor = None
+    self.mel_extractor = None
+    self.spk_emb_extractor = None
+    self.model = None
+    self.vocoder = None
+
+  @staticmethod
+  def yield_init_stage(stage_num):
+    return stage_num / 5
+
+  def logged_init(self):
+    yield self.yield_init_stage(0)
     self.feature_extractor = load_pretrained_feature_extractor(device=self.device)
+
+    yield self.yield_init_stage(1)
     self.mel_extractor = Wav2Mel(**cfg.data)
+
+    yield self.yield_init_stage(2)
     self.spk_emb_extractor = load_pretrained_spk_emb(device=self.device)
 
+    yield self.yield_init_stage(3)
     self.model = get_vc_model().to(self.device)
+
+    yield self.yield_init_stage(4)
     self.vocoder = get_vocoder().to(self.device)
+
+    yield self.yield_init_stage(5)
 
   def __call__(self, src: Utterance, tgts: List[Utterance], input_sr: int = cfg.data.sample_rate):
     """Convert source utterance from source speaker to target speaker"""
